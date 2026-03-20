@@ -1,4 +1,4 @@
-(asdf:defystem "kvs"
+(asdf:defsystem "kvs"
   :author "haruki7049"
   :class :package-inferred-system
   :depends-on ("kvs/main")
