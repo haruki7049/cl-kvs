@@ -5,4 +5,7 @@
 (in-package :kvs/main)
 
 (defun main ()
-  "Entry point for the kvs application")
+  "Entry point for the kvs application"
+
+  (progn
+    (uiop:quit 0)))
