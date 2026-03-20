@@ -4,6 +4,6 @@
 
 pkgs.mkShell {
   nativeBuildInputs = [
-    pkgs.sbcl
+    (pkgs.sbcl.withPackages (ps: [ ps.arrow-macros ]))
   ];
 }
