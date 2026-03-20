@@ -1,2 +1,4 @@
-.qlot/
-/bin/
+# Nix
+.direnv/
+result*
+result-*
