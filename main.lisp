@@ -73,39 +73,36 @@
     :initarg :v
     :accessor v)))
 
-(defclass database ()
-  ((inner
-    :type (vector value)
-    :initarg :inner
-    :accessor inner
-    :initform (make-array 0
-                          :fill-pointer 0
-                          :element-type 'value
-                          :adjustable t))))
-
 (defun main ()
   "Entry point for the kvs application"
 
   (progn
-    (defvar *db* (make-instance 'database))
+    (defvar *db* (make-instance 'value-vector
+                                :v (make-array 0
+                                               :fill-pointer 0
+                                               :element-type 'value
+                                               :adjustable t)))
 
     (defvar *new-v* (make-instance 'value-vector
                                    :v (make-array 5
                                                   :fill-pointer 5
                                                   :element-type 'value
                                                   :adjustable t
-                                                  :initial-element (make-instance 'value-integer :v 8))))
+                                                  :initial-element (make-instance 'value-vector
+                                                                                  :v (make-array 5
+                                                                                                 :fill-pointer 5
+                                                                                                 :element-type 'value
+                                                                                                 :adjustable t
+                                                                                                 :initial-element (make-instance 'value-integer
+                                                                                                                                 :v 4))))))
 
-    (vector-push-extend *new-v* (inner *db*))
-    (vector-push-extend *new-v* (inner *db*))
-    (vector-push-extend *new-v* (inner *db*))
-    (vector-push-extend *new-v* (inner *db*))
-    (vector-push-extend *new-v* (inner *db*))
+    (vector-push-extend *new-v* (v *db*))
+    (vector-push-extend *new-v* (v *db*))
+    (vector-push-extend *new-v* (v *db*))
+    (vector-push-extend *new-v* (v *db*))
+    (vector-push-extend *new-v* (v *db*))
 
-    (map 'vector
-         (lambda (item)
-           (format t "~s~%" (to-string item)))
-         (inner *db*))
+    (format t "~s~%" (to-string *db*))
 
     (uiop:quit 0))
   )
